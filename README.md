@@ -8,11 +8,17 @@
 >
 > **本项目采用 MIT 许可证，允许使用、修改与商业使用，请保留版权和许可声明。**
 >
-> 本软件通过模拟键盘与鼠标输入在游戏内演奏，可能违反游戏的用户协议；使用存在账号被警告、限制、回退或**封禁**的风险，也可能因误操作、系统延迟或兼容性问题导致异常，使用者需自行承担全部后果。请在使用前确认游戏规则与当地法律法规，继续使用即表示已理解并接受本声明。
+> **使用本软件可能违反游戏用户协议，存在账号被警告、限制、回退或封禁的风险，使用者需自行承担全部后果。**
+>
+> 本软件通过模拟键盘与鼠标输入在游戏内演奏，也可能因误操作、系统延迟或兼容性问题导致异常。请在使用前确认游戏规则与当地法律法规，继续使用即表示已理解并接受本声明。
 >
 > 启动软件时会先弹出完整声明，需选择「我已知晓，继续使用」或「退出」；主界面底部另常驻红色提示条，点击可再次查看。
 
 ## 直接使用（推荐玩家）
+
+**[点击下载 Windows 程序包](https://github.com/ActionHeart/-NightwatchMIDI/releases/latest/download/NightwatchMIDI-Windows.zip)**。请全部解压后运行 `NightwatchMIDI.exe`；GitHub 的 “Code → Download ZIP” 是源码，需要自行安装 Python 和依赖。
+
+v0.4.1 修复了 Windows 打包时混入其他软件运行库导致的 QtWidgets 启动错误，并在生成下载包前自动验证成品启动。
 
 在 Releases 下载并解压 `NightwatchMIDI-Windows.zip`（包含《勾指起誓》《卡农》《小星星》），打开其中的 `NightwatchMIDI.exe`，双击打开即可：单文件、无需安装 Python、无控制台窗口。要求 Windows 10/11 64 位；首次运行会先显示免责声明。未签名的个人项目可能被 SmartScreen 拦截，选择“更多信息 → 仍要运行”即可。
 
@@ -56,15 +62,24 @@ py -3.11 -m venv .venv
 
 ## 项目导航
 
-| 目录 | 内容 |
+| 文件或目录 | 功能 |
 | --- | --- |
-| `src/nightwatch_midi/` | 应用源码及乐器配置 |
-| `tests/` | 仅使用模拟输入的自动测试 |
-| `examples/` | 三首随包 MIDI 乐谱 |
-| `docs/` | 使用说明、开发说明和截图 |
-| `tools/` | 示例生成、离线分析、截图和源码打包工具 |
+| `assets/` | 图标原图 |
+| `docs/` | 使用文档 |
+| `examples/` | 内置乐谱 |
+| `src/nightwatch_midi/` | 播放器源码 |
+| `tests/` | 自动测试 |
+| `tools/` | 构建工具 |
+| `.gitattributes` | 文件格式规则 |
+| `.gitignore` | 上传忽略规则 |
+| `.python-version` | Python 版本 |
+| `LICENSE` | MIT 许可证 |
+| `README.md` | 项目首页 |
+| `pyproject.toml` | 项目与依赖 |
+| `start-debug.cmd` | 调试启动 |
+| `start.cmd` | 常规启动 |
 
-[详细使用说明](docs/usage.md) · [开发、测试与发布](docs/development.md) · [示例说明](examples/README.md)
+[详细使用说明](docs/usage.md) · [示例说明](examples/README.md)
 
 ## 实现与许可
 

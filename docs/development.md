@@ -75,6 +75,8 @@ NightwatchMIDI/
 
 EXE 未签名，Windows SmartScreen 可能提示；它不包含本机曲库（曲库仍位于 `%APPDATA%\NightwatchMIDI\library`）。修改版本号后再构建，以便 Release 附件与源码包版本一致。
 
+构建时隔离 PATH 和外部 Python、Qt 插件路径，避免收集其他软件的 DLL。生成下载包前，会从临时目录启动成品，验证 Qt Windows 平台、主界面绘制和图标加载；检查过程中禁止真实输入。启动检查失败则终止打包。
+
 ## GitHub 发布
 
 仅将本项目目录作为仓库根目录；不要上传上一级目录、本机虚拟环境或曲库。发布前运行测试，然后生成发布资产：

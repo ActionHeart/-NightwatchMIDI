@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QPushButton, QToolButton, QMenu,
 )
 
-DISCLAIMER_BRIEF = ("免责声明：本项目仅供个人学习、技术研究与娱乐使用；使用可能触发游戏封号等风险，请自行承担后果。")
+DISCLAIMER_BRIEF = ("免责声明：使用可能违反游戏规则，存在账号封禁风险，请自行承担后果。")
 DISCLAIMER_TEXT = (
     "本项目采用 MIT 许可证，允许使用、修改与商业使用，请保留版权和许可声明。\n\n"
     "本软件通过模拟键盘与鼠标输入在游戏内演奏，可能违反游戏的用户协议或相关规定；"
@@ -28,7 +28,11 @@ def disclaimer_box(parent=None, *, startup=False):
     box.setWindowTitle("免责声明")
     box.setIcon(QMessageBox.Icon.Warning)
     box.setText("使用前请阅读并确认以下声明")
-    box.setInformativeText(DISCLAIMER_TEXT)
+    from html import escape
+    box.setTextFormat(Qt.TextFormat.RichText)
+    risk = "使用本软件存在账号被警告、限制、回滚或封禁的风险"
+    formatted = escape(DISCLAIMER_TEXT).replace("\n\n", "<br><br>")
+    box.setInformativeText(formatted.replace(risk, f'<b style="color:#b91c1c">{risk}</b>'))
     if startup:
         box.addButton(DISCLAIMER_ACCEPT, QMessageBox.ButtonRole.AcceptRole)
         box.addButton(DISCLAIMER_DECLINE, QMessageBox.ButtonRole.RejectRole)

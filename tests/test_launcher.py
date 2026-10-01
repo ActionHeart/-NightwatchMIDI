@@ -1,5 +1,8 @@
 import importlib.util
 import os
+import json
+from types import SimpleNamespace
+import pytest
 from pathlib import Path
 
 from PySide6.QtCore import QRect, QSize
@@ -100,3 +103,32 @@ def test_release_whitelist_includes_both_launchers():
     text = (ROOT / "tools" / "build_source_release.py").read_text(encoding="utf-8")
     assert '"start.cmd"' in text
     assert '"start-debug.cmd"' in text
+
+
+def test_build_environment_ignores_foreign_dll_and_qt_paths(monkeypatch):
+    module = load_build_exe()
+    monkeypatch.setenv("PATH", "C:/unrelated-software/bin")
+    monkeypatch.setenv("QT_PLUGIN_PATH", "C:/other-qt/plugins")
+    monkeypatch.setenv("PYTHONPATH", "C:/other-python")
+    env = module.isolated_environment()
+    assert "unrelated-software" not in env["PATH"]
+    assert "QT_PLUGIN_PATH" not in env and "PYTHONPATH" not in env
+    assert os.environ["PATH"] == "C:/unrelated-software/bin"
+
+
+@pytest.mark.parametrize("status,code", [("ok", 0), ("error", 1), ("error", 0)])
+def test_packaged_startup_gate_checks_report_and_exit_code(monkeypatch, status, code):
+    module = load_build_exe()
+
+    def run(command, **kwargs):
+        assert command[1] == "--smoke-test"
+        assert kwargs["env"]["QT_QPA_PLATFORM"] == "windows"
+        Path(command[2]).write_text(json.dumps({"status": status}), encoding="utf-8")
+        return SimpleNamespace(returncode=code)
+
+    monkeypatch.setattr(module.subprocess, "run", run)
+    if status == "ok" and code == 0:
+        module.verify_executable(Path("example.exe"))
+    else:
+        with pytest.raises(RuntimeError, match="failed startup"):
+            module.verify_executable(Path("example.exe"))

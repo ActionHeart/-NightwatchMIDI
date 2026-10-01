@@ -59,7 +59,7 @@ def test_disclaimer_banner_present(app):
     window.show()
     app.processEvents()
     assert window.disclaimer.objectName() == "disclaimer"
-    assert "仅供个人学习" in window.disclaimer.text()
+    assert "账号封禁风险" in window.disclaimer.text()
     assert "封" in DISCLAIMER_TEXT and "自行承担" in DISCLAIMER_TEXT
     assert "QPushButton#disclaimer" in window.styleSheet()
     assert window.height() <= 650

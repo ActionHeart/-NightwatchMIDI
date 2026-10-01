@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "NightwatchMIDI"
+version = "0.4.0"
+description = "Windows MIDI harmonica player with cancellable SendInput scheduling"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.11,<3.12"
+dependencies = ["PySide6>=6.6,<7", "mido>=1.3,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+hardware = ["python-rtmidi>=1.5,<2"]
+packaging = ["pyinstaller>=6,<7"]
+
+[project.gui-scripts]
+nightwatch-midi = "nightwatch_midi.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["nightwatch_midi*"]
+
+[tool.setuptools.package-data]
+nightwatch_midi = ["profiles/*.json", "assets/*.ico"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

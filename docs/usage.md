@@ -1,10 +1,12 @@
 # NightwatchMIDI — 守夜人口琴 MIDI 播放器
 
-Python **3.11** + PySide6 + mido。通过标准 Win32 SendInput 在游戏口琴中演奏 MIDI；保留输入测试器。版本 0.4.1。
+Python **3.11** + PySide6 + mido。通过标准 Win32 SendInput 在游戏口琴中演奏 MIDI；保留输入测试器。版本 0.4.2。
 
 ## 启动
 
-首次安装：
+源码版只需安装 Python 3.11（64 位），保留 Python Launcher 或勾选 Add Python to PATH，完整解压后双击 `start.cmd`。首次启动自动创建项目环境并联网安装依赖，后续直接启动；失败时查看窗口错误并重试。安装完成后再按需以管理员身份运行。
+
+以下为可选的手动安装方法：
 
 ```powershell
 py -3.11 -m venv .venv

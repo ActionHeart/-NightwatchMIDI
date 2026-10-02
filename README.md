@@ -24,7 +24,16 @@ v0.4.1 修复了 Windows 打包时混入其他软件运行库导致的 QtWidgets
 
 ## 快速开始（源码版）
 
-适用于 Windows 10/11，使用 **Python 3.11**。下载并解压项目，在项目目录打开 PowerShell：
+适用于 Windows 10/11。玩家只需：
+
+1. 安装 **Python 3.11（64 位）**，保留 Python Launcher，或勾选 “Add Python to PATH”。
+2. 完整解压源码包，双击 **`start.cmd`**。
+
+首次启动自动创建 `.venv`、下载依赖并打开软件，需要联网，可能等待几分钟。后续启动直接复用环境，不会每次重新下载；依赖配置更新时会自动重新安装。安装失败会保留错误提示，可以联网后重试。源码目录需有写入权限。
+
+无需手动输入命令。需要排查问题时使用 `start-debug.cmd`。游戏权限高于播放器时，先完成普通权限的首次安装，再右键 `start.cmd` 选择“以管理员身份运行”。
+
+也可以手动安装：
 
 ```powershell
 py -3.11 -m venv .venv
@@ -78,6 +87,7 @@ py -3.11 -m venv .venv
 | `pyproject.toml` | 项目与依赖 |
 | `start-debug.cmd` | 调试启动 |
 | `start.cmd` | 常规启动 |
+| `setup.cmd` | 首次自动安装 |
 
 [详细使用说明](docs/usage.md) · [示例说明](examples/README.md)
 

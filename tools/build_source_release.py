@@ -9,7 +9,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     version = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
     files = [root / name for name in ("README.md", "LICENSE", "pyproject.toml", ".gitignore",
-                                      ".gitattributes", ".python-version", "start.cmd", "start-debug.cmd")]
+                                      ".gitattributes", ".python-version", "start.cmd", "start-debug.cmd", "setup.cmd")]
     for folder, suffixes in {"src/nightwatch_midi": {".py", ".json", ".ico"}, "tests": {".py", ".mid"},
                              "tools": {".py"}, "docs": {".md", ".png"},
                              "assets": {".png", ".ico"}}.items():
